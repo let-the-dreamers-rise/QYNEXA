@@ -2,8 +2,6 @@
 
 **Tagline:** Simulate relationships and predict outcomes before they happen.
 
-![QYNEXA Banner](https://via.placeholder.com/1200x400/000000/00ffff?text=QYNEXA+-+Parallel+AI+Life+Simulator)
-
 ## 🚀 Vision
 
 QYNEXA is a futuristic AI-powered parallel life simulator where your AI clone interacts with simulated personalities, analyzes compatibility, predicts outcomes of conversations and dates, and generates real-world strategies.
@@ -116,7 +114,6 @@ QYNEXA creates a parallel reality where:
    Create a \`.env.local\` file in the root directory:
    \`\`\`env
    GEMINI_API_KEY=your_gemini_api_key_here
-   NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key_here
    \`\`\`
 
 4. **Run the development server**
@@ -269,7 +266,7 @@ Using the conversation and compatibility analysis, the system predicts future ou
 Create a \`.env.local\` file with:
 
 \`\`\`env
-# Required: Google Gemini API Key
+ Required: Google Gemini API Key
 GEMINI_API_KEY=your_api_key_here
 
 \`\`\`
