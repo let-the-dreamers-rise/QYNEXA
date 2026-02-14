@@ -266,23 +266,11 @@ Using the conversation and compatibility analysis, the system predicts future ou
 Create a \`.env.local\` file with:
 
 \`\`\`env
- Required: Google Gemini API Key
+#Required: Google Gemini API Key
 GEMINI_API_KEY=your_api_key_here
 
 \`\`\`
 
-## 🚢 Deployment
-
-### Vercel (Recommended)
-1. Push code to GitHub
-2. Import project in Vercel
-3. Add environment variables
-4. Deploy
-
-### Other Platforms
-- **Netlify:** Configure build command as \`npm run build\`
-- **AWS Amplify:** Use Next.js SSR configuration
-- **Docker:** Use provided Dockerfile (if available)
 
 ## 🤝 Contributing
 
