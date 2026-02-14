@@ -52,7 +52,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 </p>
               </div>
             )}
-            <NeonButton onClick={this.handleReset} color="cyan">
+            <NeonButton onClick={this.handleReset} color="primary">
               Try Again
             </NeonButton>
           </GlassCard>
