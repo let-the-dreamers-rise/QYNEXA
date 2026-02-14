@@ -1,12 +1,12 @@
-# ONEXA - Your Parallel AI Self
+# QYNEXA - Your Parallel AI Self
 
 **Tagline:** Simulate relationships and predict outcomes before they happen.
 
-![ONEXA Banner](https://via.placeholder.com/1200x400/000000/00ffff?text=ONEXA+-+Parallel+AI+Life+Simulator)
+![QYNEXA Banner](https://via.placeholder.com/1200x400/000000/00ffff?text=QYNEXA+-+Parallel+AI+Life+Simulator)
 
 ## 🚀 Vision
 
-ONEXA is a futuristic AI-powered parallel life simulator where your AI clone interacts with simulated personalities, analyzes compatibility, predicts outcomes of conversations and dates, and generates real-world strategies.
+QYNEXA is a futuristic AI-powered parallel life simulator where your AI clone interacts with simulated personalities, analyzes compatibility, predicts outcomes of conversations and dates, and generates real-world strategies.
 
 **This is NOT a dating app.** This is a **PARALLEL SOCIAL SIMULATION ENGINE** powered by AI agents.
 
@@ -18,11 +18,11 @@ Making decisions about relationships and social interactions is hard. We often w
 - "What should I say to make a good impression?"
 - "Will this relationship work long-term?"
 
-Traditional dating apps connect you directly with people, forcing you to learn through trial and error. ONEXA lets you simulate these interactions first, giving you strategic insights before reality happens.
+Traditional dating apps connect you directly with people, forcing you to learn through trial and error. QYNEXA lets you simulate these interactions first, giving you strategic insights before reality happens.
 
 ## ✨ Solution
 
-ONEXA creates a parallel reality where:
+QYNEXA creates a parallel reality where:
 
 1. **Your AI Clone** - A digital twin that mirrors your personality, communication style, and social goals
 2. **Simulated Personalities** - AI-generated profiles of other people based on their bios, chats, or descriptions
@@ -102,8 +102,8 @@ ONEXA creates a parallel reality where:
 
 1. **Clone the repository**
    \`\`\`bash
-   git clone https://github.com/yourusername/onexa.git
-   cd onexa
+   git clone https://github.com/yourusername/QYNEXA.git
+   cd QYNEXA
    \`\`\`
 
 2. **Install dependencies**
@@ -166,7 +166,7 @@ ONEXA creates a parallel reality where:
 
 ## 🔗 Onchain Component
 
-ONEXA integrates blockchain technology for premium feature unlocking:
+QYNEXA integrates blockchain technology for premium feature unlocking:
 
 - **Network:** SKALE Testnet (mock for demo)
 - **Mechanism:** Users initiate a transaction to unlock premium insights
@@ -179,7 +179,7 @@ ONEXA integrates blockchain technology for premium feature unlocking:
 ## 📁 Project Structure
 
 \`\`\`
-onexa/
+QYNEXA/
 ├── app/
 │   ├── api/              # API routes
 │   │   ├── clone/
@@ -211,7 +211,7 @@ onexa/
 
 ## 🎨 Design Philosophy
 
-ONEXA's design embodies a futuristic, high-tech aesthetic:
+QYNEXA's design embodies a futuristic, high-tech aesthetic:
 
 - **Glassmorphism:** Frosted glass effects with transparency and blur
 - **Neon Accents:** Cyan (#00ffff), Pink (#ff00ff), Purple (#9d00ff)
@@ -271,11 +271,7 @@ Create a \`.env.local\` file with:
 \`\`\`env
 # Required: Google Gemini API Key
 GEMINI_API_KEY=your_api_key_here
-NEXT_PUBLIC_GEMINI_API_KEY=your_api_key_here
 
-# Optional: For production blockchain integration
-# NEXT_PUBLIC_SKALE_RPC_URL=https://testnet.skalenodes.com/v1/...
-# NEXT_PUBLIC_CONTRACT_ADDRESS=0x...
 \`\`\`
 
 ## 🚢 Deployment
@@ -316,9 +312,8 @@ MIT License - feel free to use this project for learning and inspiration!
 
 Built with ❤️ for the hackathon
 
-- **Demo:** [https://onexa.vercel.app](https://onexa.vercel.app)
-- **GitHub:** [https://github.com/yourusername/onexa](https://github.com/yourusername/onexa)
+- **Demo:** [https://QYNEXA.vercel.app](https://QYNEXA.vercel.app)
 
 ---
 
-**ONEXA** - Your Parallel AI Self © 2026
+**QYNEXA** - Your Parallel AI Self © 2026
