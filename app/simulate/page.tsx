@@ -16,12 +16,15 @@ export default function SimulatePage() {
     const {
         aiClone, simulatedPersonality,
         simulationResults, setSimulationResults,
-        isUnlocked, setUnlocked,
-        premiumInsights, setPremiumInsights,
     } = useSessionStore();
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+    // LOCAL STATE for unlock — NEVER persisted, ALWAYS starts false
+    // This is the ONLY way to control unlock — no Zustand, no localStorage
+    const [paid, setPaid] = useState(false);
+    const [insights, setInsights] = useState<any>(null);
     const [insightsLoading, setInsightsLoading] = useState(false);
     const [unlockLoading, setUnlockLoading] = useState(false);
     const [unlockError, setUnlockError] = useState('');
@@ -57,7 +60,7 @@ export default function SimulatePage() {
             });
             const data: GenerateInsightsResponse = await res.json();
             if (!data.success || !data.insights) throw new Error(data.error || 'Failed');
-            setPremiumInsights(data.insights);
+            setInsights(data.insights);
         } catch { /* silent */ } finally {
             setInsightsLoading(false);
         }
@@ -90,7 +93,8 @@ export default function SimulatePage() {
                 throw new Error('Transaction verification failed. Please try again.');
             }
 
-            setUnlocked(txHash);
+            // ONLY set paid=true AFTER verified MetaMask payment
+            setPaid(true);
         } catch (err) {
             setUnlockError(err instanceof Error ? err.message : 'Unlock failed. Check MetaMask and try again.');
         } finally {
@@ -98,19 +102,14 @@ export default function SimulatePage() {
         }
     };
 
-    // SAFETY: Force-reset unlock on page mount — NO auto-unlock ever
-    useEffect(() => {
-        useSessionStore.setState({ isUnlocked: false, unlockTxHash: null, premiumInsights: null });
-    }, []);
-
     useEffect(() => {
         if (aiClone && simulatedPersonality && !simulationResults && !loading) runSim();
     }, [aiClone, simulatedPersonality]);
 
-    // Only load insights AFTER explicit MetaMask unlock
+    // Only load insights AFTER explicit MetaMask payment
     useEffect(() => {
-        if (isUnlocked && simulationResults && !premiumInsights && !insightsLoading) loadInsights();
-    }, [isUnlocked, simulationResults]);
+        if (paid && simulationResults && !insights && !insightsLoading) loadInsights();
+    }, [paid, simulationResults]);
 
     // ─── Empty state ───
     if (!aiClone && !simulationResults) {
@@ -297,15 +296,15 @@ export default function SimulatePage() {
                 </div>
 
                 {/* ═══ PREMIUM INSIGHTS — STRICTLY GATED BEHIND METAMASK ═══ */}
-                {isUnlocked && premiumInsights ? (
+                {paid && insights ? (
                     <div className="card" style={{ padding: '48px 40px', marginBottom: '48px' }}>
                         <h2 style={{ fontFamily: 'var(--font-head)', fontSize: '22px', fontWeight: 700, marginBottom: '40px', color: '#fff', textAlign: 'center' }}>🔓 Premium Insights</h2>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
                             {[
-                                { label: 'Best Opening Message', val: premiumInsights.recommendedMessage },
-                                { label: 'Ideal First Date Plan', val: premiumInsights.idealDatePlan },
-                                { label: 'Psychological Profile', val: premiumInsights.psychologicalAnalysis },
-                                { label: 'Long-Term Forecast', val: premiumInsights.longTermPotential },
+                                { label: 'Best Opening Message', val: insights.recommendedMessage },
+                                { label: 'Ideal First Date Plan', val: insights.idealDatePlan },
+                                { label: 'Psychological Profile', val: insights.psychologicalAnalysis },
+                                { label: 'Long-Term Forecast', val: insights.longTermPotential },
                             ].map((item, i) => (
                                 <div key={i}>
                                     <p style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase' as const, letterSpacing: '0.15em', marginBottom: '12px', color: 'var(--c-accent-light)' }}>{item.label}</p>
@@ -313,21 +312,21 @@ export default function SimulatePage() {
                                 </div>
                             ))}
                         </div>
-                        {premiumInsights.topicsToAvoid?.length > 0 && (
+                        {insights.topicsToAvoid?.length > 0 && (
                             <div style={{ marginTop: '40px', paddingTop: '32px', borderTop: '1px solid var(--c-border)', textAlign: 'center' }}>
                                 <p style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase' as const, letterSpacing: '0.15em', marginBottom: '16px', color: 'var(--c-red)' }}>Topics to Avoid</p>
                                 <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '10px', justifyContent: 'center' }}>
-                                    {premiumInsights.topicsToAvoid.map((t: string, i: number) => (
+                                    {insights.topicsToAvoid.map((t: string, i: number) => (
                                         <span key={i} style={{ padding: '8px 16px', borderRadius: '9999px', fontSize: '12px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.15)', color: '#fca5a5' }}>{t}</span>
                                     ))}
                                 </div>
                             </div>
                         )}
-                        {premiumInsights.confidenceTips?.length > 0 && (
+                        {insights.confidenceTips?.length > 0 && (
                             <div style={{ marginTop: '32px', paddingTop: '32px', borderTop: '1px solid var(--c-border)', textAlign: 'center' }}>
                                 <p style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase' as const, letterSpacing: '0.15em', marginBottom: '16px', color: 'var(--c-green)' }}>Confidence Tips</p>
                                 <ul style={{ listStyle: 'none', maxWidth: '480px', margin: '0 auto', display: 'flex', flexDirection: 'column' as const, gap: '12px' }}>
-                                    {premiumInsights.confidenceTips.map((tip: string, i: number) => (
+                                    {insights.confidenceTips.map((tip: string, i: number) => (
                                         <li key={i} style={{ fontSize: '14px', display: 'flex', alignItems: 'flex-start', gap: '10px', lineHeight: 1.7, color: 'var(--c-text-2)', textAlign: 'left' }}>
                                             <span style={{ color: 'var(--c-green)', marginTop: '2px' }}>•</span>{tip}
                                         </li>
